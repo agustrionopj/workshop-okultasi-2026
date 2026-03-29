@@ -1,0 +1,101 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+% --- XeLatex/LuaLatex ---
+\usepackage[no-math]{fontspec}
+\setmainfont[
+	UprightFont = * Light,
+	ItalicFont  = * Light Italic,
+	BoldFont    = * Regular,
+	BoldItalicFont = * Italic
+	]{Fira Sans}
+\usepackage[bahasa]{babel}
+\usepackage{booktabs}
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{subcaption}
+%\usepackage{subfigure}
+\hypersetup{
+	colorlinks=true,  % Colours links instead of boxes
+	urlcolor=blue,    % Colour for external hyperlinks
+	linkcolor=blue,   % Colour of internal links (sections, etc.)
+	citecolor=red,    % Colour of citations
+	bookmarks=true,   % Adds PDF bookmarks
+	hypertexnames=true
+}
+\geometry{left=2cm, right=2cm, top=2cm}
+\title{\textbf{Panduan Instalasi dan \textit{setting} NTP Meinberg}}
+\author{Agus T. P. Jatmiko}
+\hyphenation{me-la-ku-kan peng-amat-an deng-an di-re-ko-men-da-si-kan mem-pe-nga-ruh-i ren-tan peng-ambil-an}
+\begin{document}
+\maketitle
+\noindent\rule{\linewidth}{0.4pt}
+\begin{enumerate}
+	\item Unduh file instalasi NTP Meinberg dari alamat berikut: \url{https://www.meinbergglobal.com/english/sw/ntp.htm}
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_download}
+	\end{center}
+	
+	\item Klik ganda pada file, pilih \textbf{I Agree}.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_agreement}
+	\end{center}
+	
+	\item Tekan \textbf{Next}. Pada \textbf{Destination Folder} silakan tulis direktori tujuan instalasi, atau pilih default.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_install_dir}
+	\end{center}
+	
+	\item Centang semua pilihan. Tekan \textbf{Next}.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_components}
+	\end{center}
+	
+	\item Isi bagian di dalam kotak merah dengan NTP server pilihan anda (contoh: \texttt{ntp.bmkg.go.id}). File konfigurasi ini bisa diedit terpisah nantinya pada direktori default \textcolor{blue}{Program Files (x86)/NTP/etc/ntp.conf} (sesuaikan dengan direktori instalasi anda). Tekan \textbf{Next}.
+	
+	 \underline{Catatan}: 'Want to use predefined\ldots' adalah optional. Pilih \textbf{None} atau gunakan server NTP yang dipilihkan oleh software. 
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_config_options}
+	\end{center}
+	
+	\item Tekan \textbf{Next}. Jendela verifikasi config file akan muncul. Pilih \textbf{Yes} jika ingin melihat isi filenya, atau \textbf{No} untuk melihat dan mengeditnya di kesempatan yang berbeda.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_review}
+	\end{center}
+	
+	\item Jika memilih \textbf{Yes}, jendela berikut akan terbuka. NTP server yang dimasukkan pada poin 5 di atas akan tampil di file ini (lihat kotak merah). Copy dan Paste baris tersebut jika ingin menambahkan beberapa server lain. File config ini bisa diakses melalui direktori instalasi (lihat poin 5) dan mengeditnya dengan hak admin.
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{ntp_conf_singleserver}
+	\end{center}
+	
+	\item Sesuaikan seperti pada gambar. Tekan \textbf{Next}.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_service}
+	\end{center}
+	
+	\item Tunggu instalasi selesai. Tekan \textbf{Finish}.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_finish}
+	\end{center}
+	
+	\item Cari folder \textbf{Meinberg} pada Start Menu, pastikan semua terinstall dengan baik. Restart PC/laptop jika diperlukan, atau restart NTP Service (dengan hak admin) dengan klik \textbf{Restart NTP Service}.
+	\begin{center}
+		\includegraphics[width=0.4\linewidth]{meinberg_start_menu}
+	\end{center}
+	
+	\item Anda bisa klik \textbf{Quick NTP Status} untuk melihat bahwa NTP Service sudah berjalan.
+	
+	\underline{Catatan}: Jika ingin menambahkan server NTP, edit file config (lihat detil pada poin 7). Data server NTP, salah satunya, bisa dilihat pada \url{https://www.ntppool.org/en/} dan pilih zona yang diinginkan (misal Asia). Berikut adalah contoh penggunaan multi server pada file config.
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{ntp_conf}
+	\end{center}
+	 
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{quick_ntp_status_multiserver}
+	\end{center}	
+\end{enumerate}
+\end{document}

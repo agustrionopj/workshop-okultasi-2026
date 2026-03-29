@@ -1,0 +1,153 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+% --- XeLatex/LuaLatex ---
+\usepackage[no-math]{fontspec}
+\setmainfont[
+	UprightFont = * Light,
+	ItalicFont  = * Light Italic,
+	BoldFont    = * Regular,
+	BoldItalicFont = * Italic
+	]{Fira Sans}
+\usepackage[bahasa]{babel}
+\usepackage{booktabs}
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{subcaption}
+%\usepackage{subfigure}
+\hypersetup{
+	colorlinks=true,  % Colours links instead of boxes
+	urlcolor=blue,    % Colour for external hyperlinks
+	linkcolor=blue,   % Colour of internal links (sections, etc.)
+	citecolor=red,    % Colour of citations
+	bookmarks=true,   % Adds PDF bookmarks
+	hypertexnames=true
+}
+\geometry{left=2cm, right=2cm, top=2cm}
+\title{\textbf{Panduan \textit{Setting} Kamera}}
+\author{Agus T. P. Jatmiko}
+\hyphenation{me-la-ku-kan peng-amat-an deng-an di-re-ko-men-da-si-kan mem-pe-nga-ruh-i ren-tan peng-ambil-an}
+\begin{document}
+\maketitle
+\noindent\rule{\linewidth}{0.4pt}
+
+\setcounter{section}{1}
+\subsection*{Catatan Penting}
+\begin{itemize}
+	\item Setiap kamera memiliki set parameter yang unik. Gunakan dokumen ini sebagai panduan umum dan sesuaikan dengan kamera yang digunakan.
+	\item \textcolor{red}{Jangan mengubah parameter dalam tab \textbf{Image Controls} karena akan mempengaruhi kalibrasi.} Setting default adalah: Gamma=1, Contrast=0, Brightness=0, Timestamp Frames=Off.
+	\item Pada tahap ini \textbf{Preprocessing} tidak digunakan. Koreksi FLAT (jika ada) akan dilakukan terpisah.
+\end{itemize}
+
+\subsection*{1. Capture Format and Area}
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{capture_format_area}
+\end{center}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l l p{8cm}}
+		Colour Space & : & \textbf{MONO16}\\
+		Capture Area & : & \textbf{640 x 480} atau \textbf{320 x 240} (cukup kecil namun masih ada setidaknya satu atau beberapa bintang lain dalam frame)\\
+		Binning & : & \textbf{1 x 1}\\
+		Output Format & : & \textbf{FITS files (*.fits)} (\textcolor{red}{Penting! direkomendasikan}) atau \textbf{ADV files (*.adv)}\\
+	\end{tabular}
+\end{table}
+
+\subsection*{2. Camera Controls}
+\subsubsection*{2.1. Kamera non--GPS (contoh: ZWO ASI120MM)} 
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{"camera controls"}
+\end{center}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l l p{8cm}}
+		Exposure & : & \textbf{15-50 ms (LX Mode \underline{tidak} dicentang)}\\
+		&& Catatan: lakukan tes dalam rentang nilai ini untuk mendapatkan hasil terbaik.\\
+		Gain & : & \textbf{70-75 (sesuaikan untuk setiap kamera, sekitar 70-75\% dari total gain)} \\
+		Frame Rate Limit & : & \textbf{Maximum}\\
+		Turbo USB & : & \textbf{100}\\
+		Overclock & : & \textbf{0}\\
+		High Speed Mode & : & \textbf{On}\\
+	\end{tabular}
+\end{table}
+
+Parameter lain biarkan dalam keadaan default.
+
+\subsubsection*{2.2. Kamera GPS (contoh: QHY 174M GPS)}
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{"camera controls_gps"}
+\end{center}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l l p{8cm}}
+		Exposure & : & \textbf{15-50 ms (LX Mode \underline{tidak} dicentang)}\\
+		&& Catatan: lakukan tes dalam rentang nilai ini untuk mendapatkan hasil terbaik.\\
+		Gain & : & \textbf{300 (sekitar 70-75\% dari total gain)} \\
+		Frame Rate Limit & : & \textbf{Maximum}\\
+		Amp Noise Reduction & : & \textbf{Auto}\\
+		Offset & : & \textbf{100}\\
+		USB Traffic & : & \textbf{40}\\
+		&& Catatan: semakin tinggi nilai USB Traffic, transfer data semakin cepat, namun rentan terhadap \textit{drop frames}. Jika ada kendala koneksi atau \textit{drop frames}, kurangi nilai ini sampai hasilnya stabil.\\
+		Enable Live Broadcast & : & \textbf{Off}\\
+		Force Still Mode & : & \textbf{Off}\\
+	\end{tabular}
+\end{table}
+
+\subsection*{3. Image Controls}
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[width=\linewidth]{"image controls"}
+		\caption*{ZWO ASI120MM}
+	\end{minipage}\hfil
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[width=\linewidth]{"image controls gps"}
+		\caption*{QHY 174M GPS}
+	\end{minipage}
+\end{figure}
+
+Semua \textit{setting} dalam keadaan default seperti pada gambar.
+%\begin{table}[H]
+%	\centering
+%	\begin{tabular}{l l p{8cm}}
+%		Timestamp frames & : & \textbf{Off}\\
+%	\end{tabular}
+%\end{table}
+
+\subsection*{4. GPS Controls (untuk QHY 174M GPS)}
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{"gps control"}
+\end{center}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l l p{8cm}}
+			GPS & : & \textbf{On}\\
+			Show Data & : & \textbf{On} (digunakan untuk cek status GPS dan sinkronisasi jam komputer sebelum pengambilan data. )\\
+		\end{tabular}
+\end{table}
+Jangan ubah parameter lainnya. Biarkan dalam keadaan default.
+
+Jika GPS sudah dalam keadaan \textit{locked} (tekan tombol \textbf{Show Data} jika jendela status GPS belum terlihat), tekan tombol \textbf{Set PC Time to GPS Time} sesaat sebelum melakukan pengambilan data.
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{"gps status"}
+\end{center}
+
+\subsection*{5. Thermal Controls}
+\begin{center}
+	\includegraphics[width=0.4\linewidth]{"thermal controls"}
+\end{center}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l l p{8cm}}
+		Cooler Power & : & \textbf{Auto}\\
+		Target Temperature & : & \textbf{0}\\
+	\end{tabular}
+\end{table}
+\end{document}
