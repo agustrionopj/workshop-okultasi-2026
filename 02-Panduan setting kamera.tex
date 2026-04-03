@@ -6,7 +6,7 @@
 \IfFontExistsTF{Fira Sans}{
 	\setmainfont{Fira Sans}
 }
-\usepackage[bahasa]{babel}
+\usepackage[indonesian]{babel}
 \usepackage{booktabs}
 %\renewcommand{\familydefault}{\sfdefault}
 \usepackage{geometry}
@@ -27,8 +27,8 @@
 }
 \geometry{left=2cm, right=2cm, top=2cm}
 \title{\textbf{Panduan \textit{Setting} Kamera}}
-\author{Agus T. P. Jatmiko}
-\hyphenation{me-la-ku-kan peng-amat-an deng-an di-re-ko-men-da-si-kan mem-pe-nga-ruh-i ren-tan peng-ambil-an}
+\author{Observatorium Bosscha}
+\hyphenation{me-la-ku-kan peng-amat-an deng-an di-re-ko-men-da-si-kan mem-pe-nga-ruh-i ren-tan peng-ambil-an se-suai-kan}
 \begin{document}
 \maketitle
 \noindent\rule{\linewidth}{0.4pt}
@@ -38,7 +38,9 @@
 \begin{itemize}
 	\item Setiap kamera memiliki set parameter yang unik. Gunakan dokumen ini sebagai panduan umum dan sesuaikan dengan kamera yang digunakan.
 	\item \textcolor{red}{Jangan mengubah parameter dalam tab \textbf{Image Controls} karena akan mempengaruhi kalibrasi.} Setting default adalah: Gamma=1, Contrast=0, Brightness=0, Timestamp Frames=Off.
-	\item Pada tahap ini \textbf{Preprocessing} tidak digunakan. Koreksi FLAT (jika ada) akan dilakukan terpisah.
+	\item Pada tahap ini \textbf{Preprocessing} tidak digunakan.
+	\item Target frame rate yang ideal adalah lebih dari 30 fps, dengan target minimum 5 fps.
+	\item Target SNR (Signal-to-Noise Ratio) yang ideal adalah lebih dari 100, dengan target minimum 10.
 \end{itemize}
 
 \subsection*{1. Capture Format and Area}
@@ -48,34 +50,36 @@
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{l l p{8cm}}
+		\begin{tabular}{l l p{12cm}}
 		Colour Space & : & \textbf{MONO16}\\
-		Capture Area & : & \textbf{640 x 480} atau \textbf{320 x 240} (cukup kecil namun masih ada setidaknya satu atau beberapa bintang lain dalam frame)\\
+		Capture Area & : & Sesuaikan ukuran ROI sehingga target \textbf{Frame Rate} tercapai, dan medan pandang cukup untuk menangkap bintang target dan bintang-bintang pemandu.\\
+		 && Catatan: semakin besar ROI, semakin rendah frame rate. Sesuaikan dengan kebutuhan dan kemampuan komputer.\\
 		Binning & : & \textbf{1 x 1}\\
-		Output Format & : & \textbf{FITS files (*.fits)} (\textcolor{red}{Penting! direkomendasikan}) atau \textbf{ADV files (*.adv)}\\
+		Output Format & : & \textbf{FITS files (*.fits)} \\
 	\end{tabular}
 \end{table}
 
 \subsection*{2. Camera Controls}
-\subsubsection*{2.1. Kamera non--GPS (contoh: ZWO ASI120MM)} 
+\subsubsection*{2.1. Kamera non--GPS (contoh: ZWO ASI290MM)} 
 \begin{center}
 	\includegraphics[width=0.4\linewidth]{"camera controls"}
 \end{center}
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{l l p{8cm}}
-		Exposure & : & \textbf{15-50 ms (LX Mode \underline{tidak} dicentang)}\\
-		&& Catatan: lakukan tes dalam rentang nilai ini untuk mendapatkan hasil terbaik.\\
+	\begin{tabular}{l l p{12cm}}
+		Exposure & : & \textbf{5-25 ms (LX Mode \underline{tidak} dicentang)}\\
+		&& Catatan: lakukan tes dalam rentang nilai ini untuk mencapai target frame rate dan SNR.\\
 		Gain & : & \textbf{70-75 (sesuaikan untuk setiap kamera, sekitar 70-75\% dari total gain)} \\
 		Frame Rate Limit & : & \textbf{Maximum}\\
-		Turbo USB & : & \textbf{100}\\
+		Turbo USB & : & \textbf{40-80}\\
+		&& Catatan: semakin tinggi nilai USB Traffic, transfer data semakin cepat, namun rentan terhadap \textit{drop frames}. Jika ada kendala koneksi atau \textit{drop frames}, kurangi nilai ini sampai hasilnya stabil.\\
 		Overclock & : & \textbf{0}\\
-		High Speed Mode & : & \textbf{On}\\
+		High Speed Mode & : & \textbf{Off}\\
 	\end{tabular}
 \end{table}
 
-Parameter lain biarkan dalam keadaan default.
+Parameter lain biarkan dalam keadaan \textit{default}.
 
 \subsubsection*{2.2. Kamera GPS (contoh: QHY 174M GPS)}
 \begin{center}
@@ -84,14 +88,14 @@ Parameter lain biarkan dalam keadaan default.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{l l p{8cm}}
-		Exposure & : & \textbf{15-50 ms (LX Mode \underline{tidak} dicentang)}\\
-		&& Catatan: lakukan tes dalam rentang nilai ini untuk mendapatkan hasil terbaik.\\
+	\begin{tabular}{l l p{10cm}}
+		Exposure & : & \textbf{5-25 ms (LX Mode \underline{tidak} dicentang)}\\
+		&& Catatan: lakukan tes dalam rentang nilai ini untuk mencapai target frame rate dan SNR.\\
 		Gain & : & \textbf{300 (sekitar 70-75\% dari total gain)} \\
 		Frame Rate Limit & : & \textbf{Maximum}\\
 		Amp Noise Reduction & : & \textbf{Auto}\\
 		Offset & : & \textbf{100}\\
-		USB Traffic & : & \textbf{40}\\
+		USB Traffic & : & \textbf{40-80}\\
 		&& Catatan: semakin tinggi nilai USB Traffic, transfer data semakin cepat, namun rentan terhadap \textit{drop frames}. Jika ada kendala koneksi atau \textit{drop frames}, kurangi nilai ini sampai hasilnya stabil.\\
 		Enable Live Broadcast & : & \textbf{Off}\\
 		Force Still Mode & : & \textbf{Off}\\
@@ -103,7 +107,7 @@ Parameter lain biarkan dalam keadaan default.
 	\centering
 	\begin{minipage}[t]{0.45\textwidth}
 		\includegraphics[width=\linewidth]{"image controls"}
-		\caption*{ZWO ASI120MM}
+		\caption*{ZWO ASI290MM}
 	\end{minipage}\hfil
 	\begin{minipage}[t]{0.45\textwidth}
 		\includegraphics[width=\linewidth]{"image controls gps"}
