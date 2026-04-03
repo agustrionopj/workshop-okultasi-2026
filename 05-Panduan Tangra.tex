@@ -37,6 +37,15 @@
 \begin{document}
 \maketitle
 \noindent\rule{\linewidth}{0.4pt}
+\section*{Prasyarat}
+Sebelum memulai, pastikan hal berikut sudah terpenuhi:
+\begin{itemize}
+\item Data video/fits sudah tersalin lengkap (tidak ada file yang hilang/korup).
+\item Waktu observasi pada sistem akuisisi sudah tersinkron (NTP/GPS) dan dicatat dalam UTC.
+\item Anda mengetahui mode akuisisi data (ADV atau FITS sequence) serta bit depth yang digunakan.
+\item Nama target, waktu kejadian prediksi, dan durasi observasi sudah disiapkan untuk verifikasi hasil.
+\end{itemize}
+
 \section*{Instalasi}
 \begin{enumerate}
 	\item Unduh file instalasi Tangra dari laman Okultasi 2026 Observatorium Bosscha dan ekstrak ke folder kerja anda.
@@ -84,11 +93,11 @@
 		\begin{center}
 			\includegraphics[width=0.4\linewidth]{tangra-open-fits-video}
 		\end{center}
-		\item Pilih \texttt{DATE-OBS} untuk memastikan \textit{timing} yang dipilih adalah waktu paparan di awal \textit{frame} dan \texttt{EXPTIME}.
+		\item Pada pemetaan header FITS, pilih \texttt{DATE-OBS} sebagai sumber waktu absolut \textit{frame} dan \texttt{EXPTIME} sebagai durasi paparan. Pastikan opsi waktu merepresentasikan \textbf{awal} paparan (bukan tengah/akhir paparan).
 		\begin{center}
 			\includegraphics[width=0.4\linewidth]{tangra-open-fits-header}
 		\end{center}
-		\item Jika file data ada masalah di akurasi \textit{timing}, akan muncul jendela koreksi. Tekan OK.
+		\item Jika file data terdeteksi memiliki masalah akurasi \textit{timing}, akan muncul jendela koreksi. Tinjau pesannya, lalu tekan OK untuk melanjutkan.
 		\begin{center}
 			\includegraphics[width=0.4\linewidth]{tangra-open-fits-jitter}
 		\end{center}
@@ -104,15 +113,15 @@
 			\includegraphics[width=0.4\linewidth]{tangra-main-window}
 		\end{center}
 	\end{itemize}
-	\item Klik pada bintang target dan klik \textbf{Add Object}.
+	\item Klik pada bintang target, lalu klik \textbf{Add Object}.
 	\begin{center}
 		\includegraphics[width=0.4\linewidth]{tangra-add-object}
 	\end{center}
-	\item Pastikan pilihan seperti pada gambar dan tekan \textbf{Add}. Jika tidak ada bintang lain selain bintang target, pilih \textbf{Auto tracked}.
+	\item Pada jendela pengaturan objek target, pastikan pilihan seperti pada gambar lalu tekan \textbf{Add}. Jika medan bintang sangat minim, aktifkan \textbf{Auto tracked} untuk membantu pelacakan posisi target antar-\textit{frame}.
 	\begin{center}
 		\includegraphics[width=0.4\linewidth]{tangra-add-object2}
 	\end{center}
-	\item Lakukan untuk bintang--bintang yang lain sebagai bintang pembanding/\textit{guiding}. Pastikan \textit{setting} seperti pada gambar dan tekan \textbf{Add}.
+	\item Tambahkan satu atau lebih bintang lain sebagai bintang pembanding/\textit{guiding}. Pilih bintang yang stabil, tidak jenuh, dan tidak terlalu dekat tepi citra. Pastikan \textit{setting} seperti pada gambar lalu tekan \textbf{Add}.
 	\begin{center}
 		\includegraphics[width=0.4\linewidth]{tangra-add-comp}
 	\end{center}
@@ -120,14 +129,14 @@
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{tangra-adjust}
 	\end{center}
-	\item Tekan \textbf{Start} untuk memulai ekstraksi data. Setelahnya, jendela baru akan muncul, menampilkan kurva cahaya masing--masing bintang.
+	\item Tekan \textbf{Start} untuk memulai ekstraksi data. Setelahnya, jendela baru akan muncul dan menampilkan kurva cahaya masing--masing bintang.
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{tangra-start-extract}
 	\end{center} 
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{tangra-hasil}
 	\end{center} 
-	\item Kurva cahaya yang ditampilkan bisa dikustomisasi dengan memilih bintang--bintang yang relevan (opsional).
+	\item Kurva cahaya yang ditampilkan dapat dikustomisasi dengan memilih bintang--bintang yang relevan (opsional).
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{tangra-hasil-pilih}
 	\end{center}
@@ -139,7 +148,9 @@
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{tangra-reprocess-pilihan}
 	\end{center}
-	\item Jika sudah sesuai, export hasilnya ke dalam file .csv untuk pengolahan data lebih lanjut (dengan AOTA atau program lain) atau pilih \textit{File > Save Light Curve} untuk menyimpannya ke dalam file .lc untuk analisis dengan AOTA.
+	\item Lakukan pemeriksaan kualitas cepat sebelum ekspor: cek tidak ada saturasi pada target/pembanding, cek aperture tetap mengikuti bintang (tidak \textit{drift}), dan cek tidak ada \textit{outlier} ekstrem yang jelas tidak fisis.
+	\item Jika hasil sudah sesuai, ekspor ke file .csv untuk pengolahan lebih lanjut (dengan AOTA atau program lain) atau pilih \textit{File > Save Light Curve} untuk menyimpan ke file .lc untuk analisis dengan AOTA.
+	\underline{Catatan:} sebelum ekspor final, verifikasi kembali metadata waktu (UTC, \textit{cadence}/durasi paparan, dan indikasi \textit{dropped frame} jika ada) agar analisis kejadian okultasi tetap akurat.
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{tangra-export}
 	\end{center}
