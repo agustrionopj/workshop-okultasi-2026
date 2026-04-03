@@ -3,11 +3,11 @@
 \usepackage[T1]{fontenc}
 %\usepackage{tgpagella, eulervm}
 
-% --- XeLatex/LuaLatex --- [UNCOMMAND DI AKHIR]
-% \usepackage[no-math]{fontspec}
-% \IfFontExistsTF{Fira Sans}{
-% 	\setmainfont{Fira Sans}
-% }
+% --- XeLatex/LuaLatex --- 
+\usepackage[no-math]{fontspec}
+\IfFontExistsTF{Fira Sans}{
+	\setmainfont{Fira Sans}
+}
 
 % % --- This is for pdflatex ---
 %\usepackage[light, sfdefault]{FiraSans}
@@ -65,20 +65,20 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 		\includegraphics[width=0.6\linewidth]{snr_aij}
 	\end{center}
 	
-	\item Pilih \textit{File > Import > Image Sequence}, maka akan muncul tampilan berikut. Pastikan centang `Use virtual stack' untuk menghemat memori.
+	\item Pilih \textit{File > Import > Image Sequence}, maka akan muncul tampilan berikut. Pastikan centang `Use virtual stack'.
 	
 	\underline{Catatan:} tampilan frame berikut berada dalam mode \textit{invert}. Tekan logo dalam kotak merah untuk \textit{toggle}.
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_import}
 	\end{center}
 	\begin{center}
-		\includegraphics[width=0.6\linewidth]{snr_aij_virtualstack}
+		\includegraphics[width=0.5\linewidth]{snr_aij_virtualstack_update}
 	\end{center}
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_toggle}
 	\end{center}
 	
-	\item Tekan tombol alt + klik kiri pada bintang target, maka akan muncul profil seeing bintang tersebut. Catat nilai FWHM yang tertera pada header gambar (pada contoh ini, FWHM = 6.77). Tekan tombol `Save Aperture' dan tutup jendela tersebut. Jika ada kesalahan menandai bintang, klik tombol \includegraphics[height=1em]{aij_clear} untuk menghapus aperture dan mengulangi. FWHM (\textit{Full Width at Half Maximum}) adalah ukuran yang digunakan untuk menggambarkan lebar dari profil cahaya bintang pada citra. Nilai FWHM ini akan digunakan untuk menentukan ukuran aperture dalam fotometri bukaan.
+	\item Tekan tombol alt + klik kiri pada bintang target, maka akan muncul profil seeing bintang tersebut. Catat nilai FWHM yang tertera pada judul gambar (pada contoh ini, FWHM = 6.77). Tekan tombol `Save Aperture' dan tutup jendela tersebut. Jika ada kesalahan menandai bintang, klik tombol \includegraphics[height=1em]{aij_clear} untuk menghapus aperture dan mengulangi. FWHM (\textit{Full Width at Half Maximum}) adalah ukuran yang digunakan untuk menggambarkan lebar dari profil cahaya bintang pada citra. Nilai FWHM ini akan digunakan untuk menentukan ukuran aperture dalam fotometri bukaan.
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_seeing}
 	\end{center}
@@ -144,19 +144,18 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 	
 	\item Setelah \textit{alignment} selesai, tekan OK/Yes dan tutup jendela citra. Direktori baru bernama `aligned' akan muncul, berisi citra hasil \textit{alignment}. 
     
-    \underline{Catatan:} Jika proses yang ada tidak menghasilkan direktori `aligned', ulangi langkah \textit{Import Image Sequence} dan pastika `Use virtual stack' dicentang.
+    \underline{Catatan:} Jika proses yang ada tidak menghasilkan direktori `aligned', ulangi langkah \textit{Import Image Sequence} dan pastikan `Use virtual stack' dicentang.
 	
 	\item Lakukan \textit{File > Import > Image Sequence} sekali lagi, namun arahkan ke direktori `aligned' dan tekan OK. Maka akan muncul kembali jendela file citra. Cek dengan tombol panah kanan dan kiri untuk memastikan semua \textit{frame} telah \textit{aligned}.
 	
-	\item Tekan tombol \includegraphics[height=1em]{aij_multiap} dan pastikan \textit{setting} kurang lebih seperti pada gambar berikut. \textit{First slice},
-	\textit{Last Slice} dan parameter \textit{radius} akan berbeda untuk setiap set data. Untuk memilih bintang pembanding secara manual, pastikan opsi `Auto comparison stars' tidak dicentang. Tekan tombol 'Place Apertures'. 
+	\item Tekan tombol \includegraphics[height=1em]{aij_multiap} dan pastikan \textit{setting} kurang lebih seperti pada gambar berikut. \textit{First slice}, \textit{Last Slice} dan parameter \textit{radius} akan berbeda untuk setiap set data. Untuk memilih bintang pembanding secara manual, pastikan opsi `Auto comparison stars' tidak dicentang. Tekan tombol `Place Apertures'. 
 
     
 	\begin{center}
-		\includegraphics[width=0.6\linewidth]{snr_aij_multiap_measurement}
+		\includegraphics[width=0.6\linewidth]{snr_aij_multiap_measurement_update.png}
 	\end{center}
 	\begin{enumerate}
-		\item Klik 1x pada bintang target (Pastikan bintang dipilih tidak salah. Jika salah, hapus dengan tombol \includegraphics[height=1em]{aij_clear}). Klik juga pada bintang lain sebagai pembanding (opsional, akan berguna jika Anda ingin melakukan fotometri diferensial). Contoh pada dokumen ini menggunakan 1 bintang pembanding (aperture merah). Tekan 'Enter' untuk melakukan fotometri bukaan secara otomatis untuk semua frame. 
+		\item Klik 1x pada bintang target (Pastikan bintang dipilih tidak salah. Jika salah, hapus dengan tombol \includegraphics[height=1em]{aij_clear}). Klik juga pada bintang lain sebagai pembanding (opsional, akan berguna jika Anda ingin melakukan fotometri diferensial). Sebagai contoh, pada dokumen ini, menggunakan 1 bintang pembanding (aperture merah). Tekan `Enter' untuk melakukan fotometri bukaan secara otomatis untuk semua frame. 
 		\begin{center}
 			\includegraphics[width=0.7\linewidth]{snr_aij_aphot}
 		\end{center}
