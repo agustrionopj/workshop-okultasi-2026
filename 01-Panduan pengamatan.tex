@@ -13,7 +13,7 @@
 %\usepackage[light, sfdefault]{FiraSans}
 
 \usepackage[italic]{mathastext}
-\usepackage[bahasa]{babel}
+\usepackage[indonesian]{babel}
 \usepackage{booktabs}
 \usepackage{geometry}
 \usepackage{tabularx}
@@ -26,32 +26,33 @@
 	urlcolor=blue,    % Colour for external hyperlinks
 	linkcolor=blue,   % Colour of internal links (sections, etc.)
 	citecolor=red,    % Colour of citations
-	bookmarks=true,   % Adds PDF bookmarks
 	hypertexnames=true
 }
 
 \geometry{left=2cm, right=2cm, top=2cm}
 \title{\textbf{Panduan Pengamatan Okultasi HIP 35933 oleh Asteroid 1201 Strenua}}
-\author{Agus T. P. Jatmiko}
-\hyphenation{me-la-ku-kan peng-amat-an deng-an}
+\author{Observatorium Bosscha}
+\hyphenation{me-la-ku-kan peng-amat-an deng-an align-ment}
 \begin{document}
 \maketitle
 \noindent\rule{\linewidth}{0.4pt}
 
 \subsection*{Pengantar}
-Dokumen ini berisi detail terkait pengambilan data okultasi, baik pada waktu latihan maupun waktu pengamatan sebenarnya.
+Dokumen ini berisi rincian terkait pengambilan data okultasi, baik untuk latihan maupun pengamatan sebenarnya.
 \subsection*{Langkah 1: Persiapan awal}
 \begin{enumerate}
 	\item Lakukan persiapan setidaknya \textbf{3 jam} sebelum waktu \textit{event}.
-	\item Jika menggunakan NTP timing, pastikan PC/laptop yang digunakan tersinkronisasi dengan server jam atom melalui jaringan internet setidaknya \textbf{2 jam} sebelum waktu pengamatan.
+	\item Jika menggunakan NTP timing, pastikan PC/laptop yang digunakan telah tersinkronisasi dengan server jam atom melalui jaringan internet setidaknya \textbf{2 jam} sebelum waktu pengamatan.
 	
-	Jika menggunakan GPS, pastikan GPS sudah dalam keadaan \textit{locked} sebelum melakukan pengambilan data.
-	\item Pasang instrumen selayaknya pengamatan astronomi secara umum. Lakukan \textit{polar alignment} dan perbaiki \textit{pointing model} jika diperlukan.
-	\item Ambil data kalibrasi FLAT dengan \textit{setting} instrumen yang sama (opsional, tapi direkomendasikan).  
+	Jika menggunakan GPS, pastikan perangkat GPS sudah berada dalam keadaan \textit{locked} sebelum pengambilan data dilakukan.
+	\item Pasang instrumen sebagaimana pada pengamatan astronomi pada umumnya. Lakukan \textit{polar alignment} dan perbaiki \textit{pointing model} jika diperlukan.
+	\item Pastikan kapasitas penyimpanan data cukup untuk menyimpan seluruh data yang akan diambil. Periksa kembali \textit{setting} pada perangkat lunak pengambilan data (misalnya SharpCap) untuk memastikan bahwa data akan disimpan dalam format dan lokasi yang benar.
+	\item Siapkan log--sheet untuk mencatat semua informasi terkait pengamatan, termasuk konfigurasi instrumen, kondisi pengamatan, dan catatan penting lainnya. Isi log-sheet sesuai dengan format yang sudah disediakan. Pastikan semua anggota tim memahami cara mengisi log-sheet dengan benar.
 \end{enumerate}
+\pagebreak
 \subsection*{Langkah 2: \textit{Pointing} ke bintang target}
 \begin{enumerate}
-	\item Detail bintang target bisa dilihat pada tabel berikut.
+	\item Detail bintang target dapat dilihat pada tabel berikut.
 	\begin{table}[H]
 		\centering
 		\large
@@ -64,79 +65,78 @@ Dokumen ini berisi detail terkait pengambilan data okultasi, baik pada waktu lat
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	\item Setelah teleskop mengarah ke target, gunakan \textit{finding chart} pada Gambar~\ref{fig:findingchart} untuk memastikan bahwa teleskop sudah benar mengarah ke bintang target. (\underline{catatan:} untuk teleskop yang sudah terkalibrasi dengan baik (\textit{polar aligned}) dan memiliki akurasi pointing tinggi bisa melewati tahap ini).
-	\item Pastikan bintang dalam keadaan fokus saat diamati dengan teleskop. Lakukan koreksi jika belum.
+	\item Setelah teleskop mengarah ke target, gunakan \textit{finding chart} pada Gambar~\ref{fig:findingchart} untuk memastikan bahwa teleskop telah mengarah dengan benar ke bintang target. (\underline{Catatan:} untuk teleskop yang sudah terkalibrasi dengan baik (\textit{polar aligned}) dan memiliki akurasi \textit{pointing} yang tinggi, tahap ini dapat dilewati).
+	\item Pastikan ada bintang lain di sekitar bintang target yang ikut terekam dalam satu \textit{frame}. Bintang ini akan berguna saat ekstraksi data. Bintang target tidak harus berada tepat di tengah \textit{frame}. FOV minimum dapat dilihat pada Gambar~\ref{fig:findingchart} (kotak merah). 
+	\item Pastikan bintang berada dalam fokus saat diamati dengan teleskop. Lakukan koreksi jika belum.
 \end{enumerate}
 
 \subsection*{Langkah 3: Pengambilan Data}
 \begin{enumerate}
-	\item Pastikan bintang target berada di tengah \textit{frame} sesaat sebelum pengambilan data. \textcolor{red}{Jangan menggeser bintang target saat pengambilan data meskipun bintang bergeser. Jika \textit{tracking} teleskop kurang baik, pastikan peletakan target dilakukan dengan pertimbangan bahwa target akan tetap di dalam \textit{frame} selama pengambilan data.}
+	\item Pastikan bintang target berada di tengah \textit{frame} sesaat sebelum pengambilan data. \textcolor{red}{Jangan menggeser bintang target selama pengambilan data meskipun bintang tampak bergeser. Jika \textit{tracking} teleskop kurang baik, pastikan peletakan target dilakukan dengan mempertimbangkan agar target tetap berada di dalam \textit{frame} selama pengambilan data.} Selama pengambilan data, jangan melakukan \textit{guiding}.
 	\item Pastikan \textit{setting} pada SharpCap sudah sesuai dengan Panduan \textit{Setting} Kamera (dokumen terpisah).
 	\item Pengambilan data dilakukan \textcolor{blue}{$\sim 5$ menit sebelum waktu okultasi dan dihentikan $\sim 5$ menit setelah waktu okultasi}, dengan detail sebagai berikut.
 	\begin{enumerate}
-		\item Untuk \textbf{malam latihan}, ambil total 10 menit data dari pukul \textbf{12:36.8 UT (19:36.8 WIB)} s.d. \textbf{12:46.8 UT (19:46.8 WIB)}.
+		\item Untuk \textbf{malam latihan}, ambil total 10 menit data dari pukul \textbf{12:37 UT (19:37 WIB)} s.d. \textbf{12:47 UT (19:47 WIB)}.
 		
-		 Gunakan kesempatan ini untuk mencoba-coba waktu paparan (dimulai dari nilai rekomendasi) untuk menghasilkan kualitas data dengan SNR yang cukup tanpa mengorbankan terlalu banyak titik sampel.
-		\item Untuk \textbf{malam gladi}, ambil total 10 menit data dari pukul \textbf{12:36.8 UT (19:36.8 WIB)} s.d. \textbf{12:46.8 UT (19:46.8 WIB)}.
+		Gunakan kesempatan ini untuk mencoba waktu \textit{exposure} (dimulai dari nilai rekomendasi) guna menghasilkan kualitas data dengan SNR yang memadai tanpa mengorbankan terlalu banyak titik sampel (Tabel~\ref{tab:snrfps}).
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l l l}
+		& \textbf{Ideal} & \textbf{Minimum} \\
+		\hline
+		SNR & $\geq 100$ & 10 \\
+		FPS & $\geq 30$ & 5 \\
+	\end{tabular}
+	\caption{Rekomendasi kualitas data (SNR dan FPS).}
+	\label{tab:snrfps}
+\end{table}
+
+\item Untuk \textbf{malam gladi}, ambil total 10 menit data dari pukul \textbf{12:37 UT (19:37 WIB)} s.d. \textbf{12:47 UT (19:47 WIB)}.
 		
 		Kesempatan ini digunakan untuk finalisasi konfigurasi instrumen dan \textit{setting} kamera. Konfigurasi terbaik dari sesi ini akan dipertahankan untuk digunakan pada malam \textit{event}.
-		\item Untuk \textbf{malam \textit{event}}, ambil total 10 menit data dari pukul \textbf{12:36.8 UT (19:36.8 WIB)} s.d. \textbf{12:46.8 UT (19:46.8 WIB)}. 
+		\item Untuk \textbf{malam \textit{event}}, ambil total 10 menit data dari pukul \textbf{12:37 UT (19:37 WIB)} s.d. \textbf{12:47 UT (19:47 WIB)}. 
 	\end{enumerate}
 	\underline{Catatan umum}: 
 	\begin{itemize}
 		\item Sesuaikan waktu lokal/waktu zona pengamatan dengan lokasi \textit{chord} masing--masing.
-		\item Pantau apakah ada \textit{drop frames}. Catat pada log--sheet jika ada (dan berapa banyak). Catat pula waktu awal dan akhir pengambilan data pada log--sheet.
-		\item Gunakan log--sheet yang berbeda untuk setiap malam pengamatan. Beri judul yang sesuai (misal malam latihan, malam gladi, malam \textit{event})
+		\item Pantau apakah terjadi \textit{drop frames}. Catat pada log--sheet jika ada, termasuk jumlahnya. Catat pula waktu awal dan akhir pengambilan data pada log--sheet.
+		\item Gunakan log--sheet yang berbeda untuk setiap malam pengamatan. Beri judul yang sesuai (misalnya malam latihan, malam gladi, malam \textit{event}).
 	\end{itemize}
-	\underline{Catatan log--sheet}:
-	\begin{itemize}
-		\item Gunakan/tulis waktu pengamatan dalam UT.
-		\item Tulis lokasi pengamatan (bujur, lintang, ketinggian).
-		\item Tulis konfigurasi sistem yang digunakan (teleskop, kamera, mode \textit{timing} (GPS/NTP), sistem operasi).
-		\item Tulis nama lengkap semua orang yang terlibat dalam tim.
-		\item Tulis inisial/singkatan/\textit{nick name} dari lokasi pengamatan dengan huruf kapital dan terdiri dari satu kata saja (contoh: Observatorium Bosscha: BOSSCHA).
-	\end{itemize}
+	
 %	\pagebreak
 	\textbf{DO \& DON'T}
 	
 	\underline{DO}:
 	\begin{itemize}
-		\item Kontrol pencahayaan. Lindungi teleskop dari paparan cahaya lingkungan (layar laptop, senter, dll)
-		\item Jika memungkinkan, usahakan ada bintang lain di sekitar bintang target yang ikut terekam dalam satu \textit{frame}. Bintang ini akan berguna saat ekstraksi data. Bintang target tidak perlu terlalu sempurna berada di tengah \textit{frame}.
+		\item Kendalikan pencahayaan. Lindungi teleskop dari paparan cahaya lingkungan (layar laptop, senter, dan lain-lain).
 	\end{itemize}
 	\underline{DON'T}
 	\begin{itemize}
 		\item Berjalan di sekitar teleskop saat pengambilan data.
-		\item Menyalakan senter/lampu saat pengambilan data.
-		\item Menggerakkan teleskop untuk \textit{guiding} bintang target saat pengambilan data. 		
+		\item Menyalakan senter/lampu saat pengambilan data.		
 	\end{itemize} 
 \end{enumerate}
-% TODO: \usepackage{graphicx} required
 \begin{figure}
 	\centering
 	\includegraphics[width=0.65\linewidth]{finding_chart}
-	\caption{\textit{Finding chart} untuk bintang target dengan FOV $40' \times 40'$.}
+	\caption{\textit{Finding chart} untuk bintang target dengan FOV $40' \times 40'$. Kotak merah menunjukkan FOV minimum yang harus tercakup dalam pengamatan. }
 	\label{fig:findingchart}
 \end{figure}
 
 \subsection*{Langkah 4: Setelah pengamatan}
 \begin{enumerate}
 	\item Pastikan log--sheet sudah dilengkapi. Tulis semua informasi yang relevan terkait kondisi pengamatan.
-	\item Unggah data pengamatan dan FLAT (jika ada) ke tautan Google Drive yang disediakan sesegera mungkin. Masukkan file--file tersebut ke dalam folder dengan format nama folder \textcolor{blue}{\textsc{\textbf{[nama chord]}}} (contoh: \textcolor{blue}{\textbf{BOSSCHA}}) dan ubah nama filenya dengan format: 
+	\item Unggah data pengamatan ke tautan yang disediakan sesegera mungkin. Jika pengiriman data melalui internet tidak memungkinkan, kontributor dapat mengirimkan data secara fisik ke Observatorium Bosscha. 
 	
-	\textcolor{blue}{
-	\textsc{\textbf{[jenis pengamatan (latihan/gladi/event)]\_[nama chord]\_[tahun bulan tanggal]\_[tipe data (target/flat)]}}.adv
-	}
-	
-	Contoh: \textcolor{blue}{\textbf{GLADI\_BOSSCHA\_20260401\_TARGET}.adv} 
-%	
-%	dan bagikan tautannya ke koordinator kegiatan.
-	
-	\underline{Catatan:}
-	\begin{itemize}
-%		\item Jika ada \textit{chord}/titik pengamatan yang keberatan membagikan data mentahnya secara langsung, PI \textit{chord} tersebut bertanggung jawab untuk mengolah data tersebut menjadi kurva cahaya dan menyimpannya ke dalam format .csv dengan penamaan file seperti tersebut di atas. Pastikan kalibrasi telah dilakukan (jika ada) sebelum mengekstrak kurva cahayanya. Unggah hasil ekstraksi tersebut ke tautan yang disediakan.
-		\item Jika format file yang digunakan adalah .FITS, letakkan file--file ini ke dalam sub--folder di bawah folder utama setiap \textit{chord} dengan penamaan sesuai Langkah 4 Poin 2 di atas (contoh: \textcolor{blue}{\textbf{BOSSCHA/GLADI\_BOSSCHA\_20260401\_TARGET/}$\cdots$.fits})
-	\end{itemize} 
+	Buat folder utama dengan format \textcolor{blue}{\textsc{[nama chord]}} (contoh: \textcolor{blue}{\textbf{BOSSCHA}}). Buat subfolder untuk setiap malam pengamatan dengan format nama folder \textcolor{blue}{\textsc{[jenis pengamatan (latihan/gladi/event)]\_[nama chord]\_[tahun bulan tanggal]}} (contoh: \textcolor{blue}{\textbf{GLADI\_BOSSCHA\_20260401}}), lalu masukkan semua data terkait malam pengamatan tersebut ke dalam subfolder yang sesuai. Contoh struktur folder dapat dilihat pada Gambar~\ref{fig:strukturfolder}.
 \end{enumerate}
+	
+\begin{figure}
+	\centering
+	\includegraphics[width=0.65\linewidth]{struktur-folder}
+	\caption{Contoh struktur folder untuk pengiriman data.}
+	\label{fig:strukturfolder}
+\end{figure}
  
 \end{document}

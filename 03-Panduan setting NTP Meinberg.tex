@@ -6,7 +6,7 @@
 \IfFontExistsTF{Fira Sans}{
 	\setmainfont{Fira Sans}
 }
-\usepackage[bahasa]{babel}
+\usepackage[indonesian]{babel}
 \usepackage{booktabs}
 %\renewcommand{\familydefault}{\sfdefault}
 \usepackage{geometry}
@@ -22,28 +22,34 @@
 	urlcolor=blue,    % Colour for external hyperlinks
 	linkcolor=blue,   % Colour of internal links (sections, etc.)
 	citecolor=red,    % Colour of citations
-	bookmarks=true,   % Adds PDF bookmarks
 	hypertexnames=true
 }
 \geometry{left=2cm, right=2cm, top=2cm}
-\title{\textbf{Panduan Instalasi dan \textit{setting} NTP Meinberg}}
-\author{Agus T. P. Jatmiko}
+\title{\textbf{Panduan Sinkronisasi Waktu dengan NTP Meinberg}}
+\author{Observatorium Bosscha}
 \hyphenation{me-la-ku-kan peng-amat-an deng-an di-re-ko-men-da-si-kan mem-pe-nga-ruh-i ren-tan peng-ambil-an}
 \begin{document}
 \maketitle
 \noindent\rule{\linewidth}{0.4pt}
+
+\subsection*{Catatan Penting}
+\begin{itemize}
+	\item Panduan ini ditujukan untuk komputer berbasis Windows yang akan digunakan dengan referensi waktu NTP melalui koneksi internet.
+	\item Lakukan sinkronisasi setidaknya \textbf{2 jam} sebelum waktu pengamatan agar masih ada waktu untuk penyesuaian jika terjadi kendala.
+\end{itemize}
+
 \begin{enumerate}
 	\item Unduh file instalasi NTP Meinberg dari alamat berikut: \url{https://www.meinbergglobal.com/english/sw/ntp.htm}
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{ntp_download}
 	\end{center}
 	
-	\item Klik ganda pada file, pilih \textbf{I Agree}.
+	\item Klik ganda file instalasi, lalu pilih \textbf{I Agree}.
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{ntp_agreement}
 	\end{center}
 	
-	\item Tekan \textbf{Next}. Pada \textbf{Destination Folder} silakan tulis direktori tujuan instalasi, atau pilih default.
+	\item Tekan \textbf{Next}. Pada bagian \textbf{Destination Folder}, tulis direktori tujuan instalasi atau gunakan direktori default.
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{ntp_install_dir}
 	\end{center}
@@ -52,20 +58,29 @@
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{ntp_components}
 	\end{center}
-	
-	\item Isi bagian di dalam kotak merah dengan NTP server pilihan anda (contoh: \texttt{ntp.bmkg.go.id}). File konfigurasi ini bisa diedit terpisah nantinya pada direktori default \textcolor{blue}{Program Files (x86)/NTP/etc/ntp.conf} (sesuaikan dengan direktori instalasi anda). Tekan \textbf{Next}.
-	
-	 \underline{Catatan}: 'Want to use predefined\ldots' adalah optional. Pilih \textbf{None} atau gunakan server NTP yang dipilihkan oleh software. 
+
+	\item Pada opsi `Want to use predefined\ldots', pilih \textbf{Asia}.
 	\begin{center}
-		\includegraphics[width=0.5\linewidth]{ntp_config_options}
+		\includegraphics[width=0.5\linewidth]{ntp_config_options1}
 	\end{center}
 	
-	\item Tekan \textbf{Next}. Jendela verifikasi config file akan muncul. Pilih \textbf{Yes} jika ingin melihat isi filenya, atau \textbf{No} untuk melihat dan mengeditnya di kesempatan yang berbeda.
+	\item Isi bagian di dalam kotak merah dengan server NTP pilihan Anda (contoh:\\
+	\texttt{ntp.bmkg.go.id}). 
+	
+	File konfigurasi ini nantinya juga dapat diedit secara terpisah pada direktori default:\\
+	\textcolor{blue}{\path{Program Files (x86)/NTP/etc/ntp.conf}}\\
+	(sesuaikan dengan direktori instalasi Anda). Tekan \textbf{Next}.
+	
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_config_options2}
+	\end{center}
+	
+	\item Tekan \textbf{Next}. Jendela verifikasi file konfigurasi akan muncul. Pilih \textbf{Yes} jika ingin melihat isi file tersebut, atau \textbf{No} untuk melihat dan mengeditnya pada kesempatan lain.
 	\begin{center}
 		\includegraphics[width=0.5\linewidth]{ntp_review}
 	\end{center}
 	
-	\item Jika memilih \textbf{Yes}, jendela berikut akan terbuka. NTP server yang dimasukkan pada poin 5 di atas akan tampil di file ini (lihat kotak merah). Copy dan Paste baris tersebut jika ingin menambahkan beberapa server lain. File config ini bisa diakses melalui direktori instalasi (lihat poin 5) dan mengeditnya dengan hak admin.
+	\item Jika memilih \textbf{Yes}, jendela berikut akan terbuka. Server NTP yang dimasukkan pada poin 5 akan tampil pada file ini (lihat kotak merah). Salin dan tempel baris tersebut jika ingin menambahkan beberapa server lain. File konfigurasi ini dapat diakses melalui direktori instalasi (lihat poin 5) dan diedit dengan hak administrator.
 	\begin{center}
 		\includegraphics[width=0.7\linewidth]{ntp_conf_singleserver}
 	\end{center}
@@ -80,20 +95,24 @@
 		\includegraphics[width=0.5\linewidth]{ntp_finish}
 	\end{center}
 	
-	\item Cari folder \textbf{Meinberg} pada Start Menu, pastikan semua terinstall dengan baik. Restart PC/laptop jika diperlukan, atau restart NTP Service (dengan hak admin) dengan klik \textbf{Restart NTP Service}.
-	\begin{center}
-		\includegraphics[width=0.4\linewidth]{meinberg_start_menu}
-	\end{center}
 	
-	\item Anda bisa klik \textbf{Quick NTP Status} untuk melihat bahwa NTP Service sudah berjalan.
-	
-	\underline{Catatan}: Jika ingin menambahkan server NTP, edit file config (lihat detil pada poin 7). Data server NTP, salah satunya, bisa dilihat pada \url{https://www.ntppool.org/en/} dan pilih zona yang diinginkan (misal Asia). Berikut adalah contoh penggunaan multi server pada file config.
+	\underline{Catatan}: Jika ingin menambahkan server NTP, edit file konfigurasi dalam mode \textbf{administrator} (lihat detail pada poin 8). Daftar server NTP dapat dilihat, misalnya, pada \url{https://www.ntppool.org/en/}, lalu pilih zona yang diinginkan (misalnya Asia). Sebaiknya gunakan beberapa server yang andal untuk mengurangi ketergantungan pada satu sumber waktu. Berikut adalah contoh penggunaan beberapa server pada file konfigurasi.
 	\begin{center}
 		\includegraphics[width=0.7\linewidth]{ntp_conf}
 	\end{center}
+	
+	\item Unduh dan instal NTP Client Monitor untuk memantau status sinkronisasi waktu. Aplikasi ini bisa diunduh dari \url{https://www.meinbergglobal.com/download/ntp/windows/time-server-monitor/ntp-time-server-monitor-104.exe}.
+	
+	\item Buka aplikasi NTP Client Monitor dalam mode \textbf{Administrator}.
 	 
+	Masuk ke tab \textbf{NTP\allowbreak\_Status} untuk melihat status sinkronisasi waktu.
 	\begin{center}
-		\includegraphics[width=0.7\linewidth]{quick_ntp_status_multiserver}
-	\end{center}	
+		\includegraphics[width=0.5\linewidth]{ntp_status}
+	\end{center}
+	
+	\item Tekan tombol \textbf{legend} untuk melihat arti setiap status sinkronisasi. Status `synchronized' dengan nilai \textit{offset} yang kecil (idealnya di bawah 1 ms) menunjukkan bahwa waktu komputer sudah tersinkronisasi dengan baik dengan server NTP.
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{ntp_legend}
+	\end{center}
 \end{enumerate}
 \end{document}

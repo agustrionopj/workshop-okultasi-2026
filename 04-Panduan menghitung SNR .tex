@@ -13,7 +13,7 @@
 %\usepackage[light, sfdefault]{FiraSans}
 
 \usepackage[italic]{mathastext}
-\usepackage[bahasa]{babel}
+\usepackage[indonesian]{babel}
 \usepackage{booktabs}
 \usepackage{geometry}
 \usepackage{tabularx}
@@ -33,7 +33,7 @@
 \geometry{left=2cm, right=2cm, top=2cm}
 \title{\textbf{Panduan Menghitung \textit{Signal--to--Noise Ratio} (SNR)} dengan AstroImageJ (AIJ)}
 \author{Observatorium Bosscha}
-\hyphenation{me-la-ku-kan peng-amat-an deng-an}
+\hyphenation{me-la-ku-kan peng-amat-an deng-an align-ment}
 \begin{document}
 \maketitle
 \noindent\rule{\linewidth}{0.4pt}
@@ -49,13 +49,14 @@ Dalam konteks CCD/CMOS, SNR dirumuskan sebagai berikut
 \end{equation}
 di mana $S$ adalah jumlah total sinyal (dalam satuan elektron) yang diterima dari sumber, $n_{pix}$ adalah jumlah piksel yang digunakan untuk mengukur sinyal, $B$ adalah jumlah rata--rata elektron latar belakang per piksel, dan $RN$ adalah \textit{noise} pembacaan per piksel (dalam satuan elektron).
 Persamaan di atas adalah model praktis untuk estimasi awal SNR. Pada kondisi sebenarnya, nilai SNR juga dipengaruhi oleh kualitas kalibrasi (bias/dark/flat), kestabilan langit, fokus, serta akurasi pemilihan aperture dan annulus latar belakang.
+Model ini mengasumsikan kondisi pengamatan relatif stabil dan belum secara eksplisit memasukkan semua sumber noise sistematik (misalnya scintillation kuat atau residu kalibrasi), sehingga hasilnya perlu diperlakukan hanya sebagai estimasi.
 
-Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{software} AstroImageJ (AIJ) dengan data yang diambil menggunakan \textsc{SharpCap}. Pastikan Anda sudah memiliki data yang siap untuk dianalisis, dan ikuti langkah--langkah berikut untuk mendapatkan nilai SNR dari data Anda.
+Panduan berikut menjelaskan cara menghitung SNR menggunakan \textit{software} AstroImageJ (AIJ) dengan data yang diambil menggunakan \textsc{SharpCap}. Pastikan Anda sudah memiliki data yang siap dianalisis, lalu ikuti langkah--langkah berikut untuk mendapatkan nilai SNR dari data Anda.
 
 \begin{enumerate}
-	\item Download AIJ dari tautan berikut (\url{https://astroimagej.com/downloads/}). Sesuaikan dengan sistem operasi yang digunakan.
+	\item Unduh AIJ dari tautan berikut (\url{https://astroimagej.com/downloads/}). Sesuaikan dengan sistem operasi yang digunakan.
 	\item Lakukan instalasi seperti biasa, semua pilihan dalam keadaan \textit{default}.
-	\item Siapkan folder kerja yang berisi file--file yang akan dicari SNR--nya. Pada contoh ini hanya digunakan 5 file saja tanpa file kalibrator (bias, dark, flat). Pastikan nama file memiliki pola tertentu, misal \textbf{namatarget\_exptime}. Secara default \textsc{SharpCap} akan memberikan penamaan file secara urut.
+	\item Siapkan folder kerja yang berisi file--file yang akan dihitung nilai SNR-nya. Pada contoh ini hanya digunakan 5 file tanpa file kalibrator (bias, dark, flat). Pastikan nama file memiliki pola tertentu, misalnya \textbf{namatarget\_exptime}. Secara default, \textsc{SharpCap} akan memberi nama file secara berurutan.
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_data_folder}
 	\end{center}
@@ -65,7 +66,7 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 		\includegraphics[width=0.6\linewidth]{snr_aij}
 	\end{center}
 	
-	\item Pilih \textit{File > Import > Image Sequence}, maka akan muncul tampilan berikut. Pastikan centang `Use virtual stack'.
+	\item Pilih \textit{File > Import > Image Sequence}, lalu akan muncul tampilan berikut. Pastikan opsi `Use virtual stack' dicentang.
 	
 	\underline{Catatan:} tampilan frame berikut berada dalam mode \textit{invert}. Tekan logo dalam kotak merah untuk \textit{toggle}.
 	\begin{center}
@@ -78,19 +79,19 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 		\includegraphics[width=0.6\linewidth]{snr_aij_toggle}
 	\end{center}
 	
-	\item Tekan tombol alt + klik kiri pada bintang target, maka akan muncul profil seeing bintang tersebut. Catat nilai FWHM yang tertera pada judul gambar (pada contoh ini, FWHM = 6.77). Tekan tombol `Save Aperture' dan tutup jendela tersebut. Jika ada kesalahan menandai bintang, klik tombol \includegraphics[height=1em]{aij_clear} untuk menghapus aperture dan mengulangi. FWHM (\textit{Full Width at Half Maximum}) adalah ukuran yang digunakan untuk menggambarkan lebar dari profil cahaya bintang pada citra. Nilai FWHM ini akan digunakan untuk menentukan ukuran aperture dalam fotometri bukaan.
+	\item Tekan tombol Alt sambil klik kiri pada bintang target, maka akan muncul profil seeing bintang tersebut. Catat nilai FWHM yang tertera pada judul gambar (pada contoh ini, FWHM = 6.77). Tekan tombol `Save Aperture' lalu tutup jendela tersebut. Jika ada kesalahan saat menandai bintang, klik tombol \includegraphics[height=1em]{aij_clear} untuk menghapus aperture dan mengulangi prosesnya. FWHM (\textit{Full Width at Half Maximum}) adalah ukuran yang digunakan untuk menggambarkan lebar profil cahaya bintang pada citra. Nilai FWHM ini akan digunakan untuk menentukan ukuran aperture dalam fotometri bukaan.
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_seeing}
 	\end{center}
 	
-	\item Klik tombol \includegraphics[height=1em]{aij_set} dan ubah beberapa parameter berikut.
+	\item Klik tombol \includegraphics[height=1em]{aij_set}, lalu ubah beberapa parameter berikut.
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_aphot_settings}
 	\end{center}
 	\begin{enumerate}
 		\item Untuk kotak (1):
 		\begin{itemize}
-			\item \textbf{Radius of object aperture}: $\sim 1.5-2$ kali FWHM. Radius ini menentukan ukuran aperture yang digunakan untuk mengukur sinyal dari bintang target. Pastikan radius cukup besar untuk menangkap mayoritas sinyal, namun tidak terlalu besar sehingga memasukkan terlalu banyak noise latar belakang. Nilai $1.5-2$ kali FWHM adalah titik awal praktis; verifikasi kembali dengan kurva pertumbuhan (\textit{curve of growth}) pada data Anda.
+			\item \textbf{Radius of object aperture}: $\sim 1.5-2$ kali FWHM. Radius ini menentukan ukuran aperture yang digunakan untuk mengukur sinyal dari bintang target. Pastikan radius cukup besar untuk menangkap mayoritas sinyal, namun tidak terlalu besar sehingga tidak memasukkan terlalu banyak noise latar belakang. Nilai $1.5-2$ kali FWHM adalah titik awal praktis; verifikasi kembali dengan kurva pertumbuhan (\textit{curve of growth}) pada data Anda.
 			  
 			  \underline{Contoh:} untuk FWHM = 6.77, maka radius yang direkomendasikan adalah sekitar $10-14$ piksel.
 			\item \textbf{Inner radius}: tambahkan $\sim 3$ piksel dari \textbf{Radius of object aperture}. Hal ini untuk memberikan jarak aman dari profil cahaya bintang target dan memastikan area anulus latar belakang bersih dari kontaminasi bintang tetangga.
@@ -100,8 +101,8 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 		\end{itemize}
 		\item Untuk kotak (2):
 		\begin{itemize}
-			\item \textbf{CCD gain}: Nilai Gain adalah faktor konversi antara jumlah elektron yang diterima sensor dengan nilai digital yang tersimpan pada citra (ADU, \textit{Analog-to-Digital Unit}).
-			Cek \textbf{CCD gain} untuk kamera Anda, biasanya tercantum pada spesifikasi kamera (terlampir adalah beberapa contoh kurva gain, sesuaikan dengan gain pada \textsc{SharpCap}). Jika data berasal dari ADC 12-bit yang diskalakan ke 16-bit, maka:
+			\item \textbf{CCD gain}: Nilai gain adalah faktor konversi antara jumlah elektron yang diterima sensor dan nilai digital yang tersimpan pada citra (ADU, \textit{Analog-to-Digital Unit}).
+			Periksa \textbf{CCD gain} untuk kamera Anda, biasanya tercantum pada spesifikasi kamera (terlampir beberapa contoh kurva gain; sesuaikan dengan gain pada \textsc{SharpCap}). Jika data berasal dari ADC 12-bit yang diskalakan ke 16-bit, maka:
 			\begin{equation}
 				\mathrm{Gain_{input}} = \frac{\mathrm{Gain_{kurva}}}{16}
 			\end{equation}
@@ -109,20 +110,21 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 			\begin{equation}
 				\mathrm{Gain_{input}} = \mathrm{{Gain_{kurva}}}  \times {16}
 			\end{equation}
-			Jika kamera Anda memiliki ADC 16-bit, nilai gain yang dimasukkan adalah nilai gain dari kurva. 
+			Jika kamera Anda memiliki ADC 16-bit, nilai gain yang dimasukkan adalah nilai gain pada kurva.
+			Pastikan terlebih dahulu bagaimana perangkat lunak akuisisi menyimpan skala ADU pada file (native atau hasil penskalaan), karena faktor 16 hanya berlaku untuk konversi skala 12-bit $\leftrightarrow$ 16-bit.
 			
 			\underline{Contoh:} untuk ZWO ASI120MM--S pada gain 75 (nilai di \textsc{SharpCap}) dan data disimpan pada mode 16-bit dari ADC 12-bit, menurut kurva nilai gain--nya adalah $\sim 0.25$ $e^-$/ADU. Nilai yang dimasukkan pada kotak (2) adalah 0.25/16 = 0.015625 $e^-$/ADU.
 			\begin{center}
 				\includegraphics[width=0.7\linewidth]{snr_gain}
 			\end{center}
-			\item \textbf{CCD readout noise}: adalah noise yang muncul saat sinyal dari sensor dibaca dan dikonversi menjadi nilai digital (ADU). Noise ini berasal dari proses elektronik di dalam kamera, seperti penguat (amplifier) dan konverter analog-ke-digital (ADC). Silakan merujuk kepada kurva terlampir untuk kamera yang digunakan. Masukkan nilai dalam satuan $e^-$ rms/pixel pada gain yang sama dengan data Anda.
+			\item \textbf{CCD readout noise}: adalah noise yang muncul saat sinyal dari sensor dibaca dan dikonversi menjadi nilai digital (ADU). Noise ini berasal dari proses elektronik di dalam kamera, seperti penguat (amplifier) dan konverter analog-ke-digital (ADC). Silakan merujuk ke kurva terlampir untuk kamera yang digunakan. Masukkan nilai dalam satuan $e^-$ rms/pixel pada gain yang sama dengan data Anda.
 			
 			\underline{Contoh:} pengamatan ini menggunakan gain 75, maka readout noise menurut kurva adalah $\sim 3.75$.
 			\begin{center}
 				\includegraphics[width=0.7\linewidth]{snr_readout}
 			\end{center}
 
-			\item \textbf{CCD dark current}: adalah noise yang dihasilkan oleh sensor kamera meskipun tidak ada cahaya yang masuk. Dark current disebabkan oleh elektron yang dihasilkan secara termal dalam sensor, dan nilainya biasanya meningkat dengan suhu. Pada kasus pengamatan okultasi, dimana waktu bukaan sangat pendek, nilai dark current biasanya sangat kecil dibandingkan dengan sinyal dari bintang target, terutama jika kamera dilengkapi dengan pendingin. Oleh karena itu, untuk perhitungan SNR awal, Anda dapat mengabaikan dark current.
+			\item \textbf{CCD dark current}: adalah noise yang dihasilkan oleh sensor kamera meskipun tidak ada cahaya yang masuk. Dark current disebabkan oleh elektron yang dihasilkan secara termal dalam sensor, dan nilainya biasanya meningkat seiring kenaikan suhu. Pada pengamatan okultasi, di mana waktu bukaan sangat pendek, nilai dark current biasanya sangat kecil dibandingkan sinyal dari bintang target, terutama jika kamera dilengkapi pendingin. Oleh karena itu, untuk perhitungan SNR awal, Anda dapat mengabaikan dark current.
 		\end{itemize}
 	\end{enumerate}
 	Tekan OK untuk menutup jendela tersebut.
@@ -137,34 +139,36 @@ Panduan berikut akan menunjukkan cara menghitung SNR menggunakan \textit{softwar
 		\includegraphics[width=0.6\linewidth]{snr_aij_stackaligner}
 	\end{center}
 	
-	\item Arahkan kursor pada bintang target dan klik 1x, maka akan muncul aperture berwarna hijau. Klik juga bintang--bintang lain yang cukup terang, maka aperture merah akan muncul. Setelah selesai, tekan `Enter'.
+	\item Arahkan kursor ke bintang target lalu klik 1x, maka aperture berwarna hijau akan muncul. Klik juga bintang--bintang lain yang cukup terang, maka aperture merah akan muncul. Setelah selesai, tekan `Enter'.
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_select}
 	\end{center}
 	
-	\item Setelah \textit{alignment} selesai, tekan OK/Yes dan tutup jendela citra. Direktori baru bernama `aligned' akan muncul, berisi citra hasil \textit{alignment}. 
+	\item Setelah \textit{alignment} selesai, tekan OK/Yes lalu tutup jendela citra. Direktori baru bernama `aligned' akan muncul dan berisi citra hasil \textit{alignment}. 
     
-    \underline{Catatan:} Jika proses yang ada tidak menghasilkan direktori `aligned', ulangi langkah \textit{Import Image Sequence} dan pastikan `Use virtual stack' dicentang.
+	\underline{Catatan:} Jika proses tersebut tidak menghasilkan direktori `aligned', ulangi langkah \textit{Import Image Sequence} dan pastikan `Use virtual stack' dicentang.
 	
-	\item Lakukan \textit{File > Import > Image Sequence} sekali lagi, namun arahkan ke direktori `aligned' dan tekan OK. Maka akan muncul kembali jendela file citra. Cek dengan tombol panah kanan dan kiri untuk memastikan semua \textit{frame} telah \textit{aligned}.
+	\item Lakukan \textit{File > Import > Image Sequence} sekali lagi, tetapi arahkan ke direktori `aligned' dan tekan OK. Jendela file citra akan muncul kembali. Periksa dengan tombol panah kanan dan kiri untuk memastikan semua \textit{frame} telah \textit{aligned}.
 	
-	\item Tekan tombol \includegraphics[height=1em]{aij_multiap} dan pastikan \textit{setting} kurang lebih seperti pada gambar berikut. \textit{First slice}, \textit{Last Slice} dan parameter \textit{radius} akan berbeda untuk setiap set data. Untuk memilih bintang pembanding secara manual, pastikan opsi `Auto comparison stars' tidak dicentang. Tekan tombol `Place Apertures'. 
+	\item Tekan tombol \includegraphics[height=1em]{aij_multiap} dan pastikan \textit{setting} kurang lebih seperti pada gambar berikut. \textit{First slice}, \textit{Last Slice}, dan parameter \textit{radius} akan berbeda untuk setiap set data. Untuk memilih bintang pembanding secara manual, pastikan opsi `Auto comparison stars' tidak dicentang. Tekan tombol `Place Apertures'.
 
     
 	\begin{center}
 		\includegraphics[width=0.6\linewidth]{snr_aij_multiap_measurement_update.png}
 	\end{center}
 	\begin{enumerate}
-		\item Klik 1x pada bintang target (Pastikan bintang dipilih tidak salah. Jika salah, hapus dengan tombol \includegraphics[height=1em]{aij_clear}). Klik juga pada bintang lain sebagai pembanding (opsional, akan berguna jika Anda ingin melakukan fotometri diferensial). Sebagai contoh, pada dokumen ini, menggunakan 1 bintang pembanding (aperture merah). Tekan `Enter' untuk melakukan fotometri bukaan secara otomatis untuk semua frame. 
+		\item Klik 1x pada bintang target (pastikan bintang yang dipilih tidak salah. Jika salah, hapus dengan tombol \includegraphics[height=1em]{aij_clear}). Klik juga pada bintang lain sebagai pembanding (opsional, berguna jika Anda ingin melakukan fotometri diferensial). Sebagai contoh, dokumen ini menggunakan 1 bintang pembanding (aperture merah). Tekan `Enter' untuk melakukan fotometri bukaan secara otomatis untuk semua frame.
 		\begin{center}
 			\includegraphics[width=0.7\linewidth]{snr_aij_aphot}
 		\end{center}
 		
-		\item Akan muncul banyak jendela, abaikan untuk sementara. Saat proses selesai, cari jendela `Measurements' (lihat gambar berikut) dan cari nilai SNR untuk target Anda (kolom Source\_SNR\_T1). Jika ingin mengetahui SNR untuk bintang pembanding, dalam kasus ini, Anda dapat melihat kolom Source\_SNR\_C2. Untuk ringkasan hasil, gunakan nilai median (atau \textit{sigma-clipped mean}) agar lebih tahan terhadap \textit{outlier}.
+		\item Akan muncul banyak jendela; abaikan untuk sementara. Saat proses selesai, cari jendela `Measurements' (lihat gambar berikut) dan cari nilai SNR untuk target Anda (kolom Source\_SNR\_T1). Jika ingin mengetahui SNR untuk bintang pembanding, pada kasus ini Anda dapat melihat kolom Source\_SNR\_C2. Untuk ringkasan hasil, gunakan nilai median (atau \textit{sigma-clipped mean}) agar lebih tahan terhadap \textit{outlier}.
 		\begin{center}
 			\includegraphics[width=0.7\linewidth]{snr_aij_snr}
 		\end{center}
+		\item Lakukan validasi ringkas hasil SNR: periksa sebaran SNR antar-\textit{frame}, identifikasi \textit{outlier} yang jelas tidak fisis (misalnya akibat awan lewat atau pergeseran bintang), lalu putuskan apakah \textit{frame} tersebut dikeluarkan dari ringkasan akhir.
 	\end{enumerate}
-	\item Selamat! Anda telah berhasil menghitung SNR data Anda.
+	\item Interpretasi cepat hasil: SNR $< 5$ umumnya menunjukkan deteksi lemah, SNR $> 10$ biasanya memadai untuk analisis awal, dan SNR $> 100$ umumnya baik. Gunakan rentang ini sebagai panduan praktis, bukan batas kaku.
+	\item Selamat! Anda telah berhasil menghitung SNR pada data Anda.
 \end{enumerate}
 \end{document}
